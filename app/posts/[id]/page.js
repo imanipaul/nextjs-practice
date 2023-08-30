@@ -49,7 +49,7 @@ export default function SinglePost({ params }) {
             <Link
               style={{ fontWeight: "lighter" }}
               key={index}
-              href={"/posts/search"}
+              href={`/posts/search/${tag}`}
             >
               {tag} |{" "}
             </Link>
