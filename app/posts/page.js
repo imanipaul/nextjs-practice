@@ -8,7 +8,12 @@ export default async function PostsPage() {
 
   return (
     <div>
+      <button>
+        <Link href={"/posts/new"}>Add New Post</Link>
+      </button>
+
       <h1>All Blog Posts</h1>
+
       <hr style={{ width: "200px" }} />
       <div style={{ paddingTop: "40px" }}>
         {posts.map((post) => (

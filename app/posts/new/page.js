@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function newPost() {
   const [submittedPost, setSubmittedPost] = useState(null);
@@ -24,6 +25,7 @@ export default function newPost() {
 
   return (
     <div>
+      <Link href={"/posts"}>Back to posts</Link>
       <h1>New Post</h1>
       <form onSubmit={handleFormSubmit} method="post">
         <label>title</label>

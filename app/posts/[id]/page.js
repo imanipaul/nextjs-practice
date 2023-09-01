@@ -41,7 +41,7 @@ export default function SinglePost({ params }) {
 
   return (
     <div style={{ paddingTop: "20px", paddingLeft: "20px" }}>
-      <Link href={"/"}>Back to home</Link>
+      <Link href={"/posts"}>Back to posts</Link>
       <section style={{ paddingTop: "50px" }}>
         <article>
           <h1 style={{ paddingBottom: "10px" }}>{post?.title}</h1>
