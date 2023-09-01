@@ -9,3 +9,13 @@ export async function GET(request, { params }) {
 
   return NextResponse.json({ post });
 }
+
+export async function DELETE(request, { params }) {
+  const { id } = params;
+  const res = await fetch(`https://dummyjson.com/posts/${id}`, {
+    method: "DELETE",
+  });
+  const post = await res.json();
+
+  return NextResponse.json({ post });
+}
