@@ -1,0 +1,13 @@
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.singlePost {
+  margin: 10px 0px;
+}
+
+.postsHeader {
+  padding: 20px;
+}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { getData } from "../getData";
+import styles from "./styles.module.css";
 
 export default async function PostsPage() {
   const { posts } = await getData();
@@ -12,16 +13,15 @@ export default async function PostsPage() {
         <Link href={"/posts/new"}>Add New Post</Link>
       </button>
 
-      <h1>All Blog Posts</h1>
+      <h1 className={styles.postsHeader}>All Blog Posts</h1>
 
-      <hr style={{ width: "200px" }} />
-      <div style={{ paddingTop: "40px" }}>
+      <div className={styles.postsContainer}>
         {posts.map((post) => (
-          <article key={post.id}>
+          <article key={post.id} className={styles.singlePost}>
             <Link href={`posts/${post.id}`}>
               <h2>{post.title}</h2>
             </Link>
-            <p style={{ paddingBottom: "30px" }}>{post.body}</p>
+            <p>{post.body}</p>
           </article>
         ))}
       </div>
