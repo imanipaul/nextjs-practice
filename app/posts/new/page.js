@@ -1,16 +1,19 @@
 "use client";
 
 export default function newPost() {
-  const sendNewPost = async () => {
-    const res = await fetch("http://localhost:3000/api/posts", {
+  const sendNewPost = async (formData) => {
+    const rest = await fetch("http://localhost:3000/api/posts", {
       method: "POST",
-      body: JSON.stringify({ prompt: "Testing" }),
+      body: JSON.stringify({
+        title: formData.get("title"),
+        body: formData.get("body"),
+        userId: formData.get("userId"),
+      }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
-    console.log("data", data);
+    const data = await rest.json();
   };
 
   const handleFormSubmit = (e) => {
@@ -30,6 +33,9 @@ export default function newPost() {
         <br />
         <label>body</label>
         <input name="body" type="textarea" />
+        <br />
+        <label>userId</label>
+        <input name="userId" type="number" />
         <br />
         <button type="submit">Submit</button>
       </form>
