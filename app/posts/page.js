@@ -4,10 +4,7 @@ import Link from "next/link";
 import { getData } from "../getData";
 
 export default async function PostsPage() {
-  //   const res = await fetch("http://localhost:3000/api/posts");
-  //   const { posts } = await res.json();
   const { posts } = await getData();
-  //   console.log("🚀 ~ data:", posts);
 
   return (
     <div>
