@@ -9,17 +9,23 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const req = await request.json();
+  const formData = await request.formData();
+  const title = formData.get("title");
+  const body = formData.get("body");
+  const userId = formData.get("userId");
 
   const newData = await fetch("https://dummyjson.com/posts/add", {
     method: "POST",
+    body: JSON.stringify({ title, body, userId }),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(req),
   });
 
-  const finalData = await newData.json();
+  const response = await newData.json();
 
-  return NextResponse.json(finalData);
+  return NextResponse.json({
+    message: "success!",
+    response,
+  });
 }

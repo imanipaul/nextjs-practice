@@ -1,19 +1,17 @@
 "use client";
 
+import { useState } from "react";
+
 export default function newPost() {
+  const [submittedPost, setSubmittedPost] = useState(null);
+
   const sendNewPost = async (formData) => {
     const rest = await fetch("http://localhost:3000/api/posts", {
       method: "POST",
-      body: JSON.stringify({
-        title: formData.get("title"),
-        body: formData.get("body"),
-        userId: formData.get("userId"),
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: formData,
     });
     const data = await rest.json();
+    setSubmittedPost(data.response);
   };
 
   const handleFormSubmit = (e) => {
@@ -39,6 +37,14 @@ export default function newPost() {
         <br />
         <button type="submit">Submit</button>
       </form>
+      <br />
+      {submittedPost && (
+        <div>
+          <h2>New Post Added:</h2>
+          <p>title: {submittedPost.title}</p>
+          <p>body: {submittedPost.body}</p>
+        </div>
+      )}
     </div>
   );
 }
