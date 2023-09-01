@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function SinglePost({ params }) {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
+  const [deletedPost, setDeletedPost] = useState(null);
 
   const fetchPost = async (id) => {
     const res = await fetch(`http://localhost:3000/api/posts/${id}`);
@@ -13,6 +14,16 @@ export default function SinglePost({ params }) {
     const { post } = await res.json();
 
     post && setPost(post);
+  };
+
+  const deletePost = async (id) => {
+    const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+      method: "DELETE",
+    });
+
+    const { post: deletedPost } = await res.json();
+
+    deletedPost && setDeletedPost(deletedPost);
   };
 
   const fetchComments = async (id) => {
@@ -67,6 +78,18 @@ export default function SinglePost({ params }) {
           <p>No comments yet</p>
         )}
       </section>
+      <br />
+      <button
+        onClick={() => {
+          console.log("delete post");
+          deletePost(params.id);
+          console.log("deleted post", deletedPost);
+        }}
+      >
+        Delete post
+      </button>
+      <br />
+      {deletedPost && <div>Post has been deleted</div>}
     </div>
   );
 }
