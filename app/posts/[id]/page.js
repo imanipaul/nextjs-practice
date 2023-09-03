@@ -85,9 +85,7 @@ export default function SinglePost({ params }) {
       <br />
       <button
         onClick={() => {
-          console.log("delete post");
           deletePost(params.id);
-          console.log("deleted post", deletedPost);
         }}
       >
         Delete post
