@@ -1,6 +1,5 @@
 "use client";
 
-import { fetchPost } from "@/app/getData";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -20,25 +19,33 @@ export default function editPage({ params }) {
     fetchPost(params.id);
   }, []);
 
-  const sendUpdatedPost = async (formData) => {
-    console.log("sending update");
-
+  const sendUpdatedPost = async (updatedData) => {
     const rest = await fetch(`http://localhost:3000/api/posts/${params.id}`, {
       method: "PUT",
-      body: formData,
+      body: JSON.stringify(updatedData),
     });
     const data = await rest.json();
-    console.log("🚀 ~ data:", data);
     setUpdatedPost(data);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("handling form submit");
-    const form = e.target;
-    const formData = new FormData(form);
 
-    sendUpdatedPost(formData);
+    const {
+      title: { value: updatedTitle },
+      body: { value: updatedBody },
+      userId: { value: updatedUserId },
+    } = e.target;
+
+    const updatedPostData = {
+      ...(updatedBody !== post?.body && { body: updatedBody }),
+      ...(updatedTitle !== post?.title && { title: updatedTitle }),
+      ...(parseInt(updatedUserId) !== post?.userId && {
+        userId: updatedUserId,
+      }),
+    };
+
+    sendUpdatedPost(updatedPostData);
   };
 
   return (
@@ -70,7 +77,14 @@ export default function editPage({ params }) {
           <button type="submit">Submit</button>
         </form>
         <br />
-        {updatedPost && <p>Updated post to the following: </p>}
+        {updatedPost && (
+          <div>
+            Updated post to the following: <br />{" "}
+            <p>title: {updatedPost?.title}</p>
+            <p>body: {updatedPost?.body}</p>
+            <p>userId: {updatedPost?.userId}</p>
+          </div>
+        )}
       </div>
     </div>
   );

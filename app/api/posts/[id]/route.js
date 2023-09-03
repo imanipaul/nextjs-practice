@@ -23,14 +23,11 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
   const { id } = params;
 
-  const formData = await request.formData();
-  const title = formData.get("title");
-  const body = formData.get("body");
-  const userId = formData.get("userId");
+  const updatedData = await request.json();
 
   const res = await fetch(`https://dummyjson.com/posts/${id}`, {
     method: "PUT",
-    body: JSON.stringify({ title, body, userId }),
+    body: JSON.stringify(updatedData),
     headers: {
       "Content-Type": "application/json",
     },
