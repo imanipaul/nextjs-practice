@@ -79,6 +79,10 @@ export default function SinglePost({ params }) {
         )}
       </section>
       <br />
+      <Link href={`/posts/${params.id}/edit`}>
+        <button>Edit post</button>
+      </Link>
+      <br />
       <button
         onClick={() => {
           console.log("delete post");
